@@ -1,0 +1,47 @@
+#comparisons {
+  height: 900px;
+  position: relative;
+  font-size: 0.25em;
+  overflow: auto; }
+
+  #comparisons .ctrls {
+    float: left;
+    width: 38%;
+    margin-left: 10%; }
+    #comparisons .ctrls h2 {
+        font-size: 3em; }
+    #comparisons label {
+      text-align: left;
+      display: block;
+      font-size: 2em;
+      line-height: 2em;
+      cursor: pointer; }
+    #comparisons input {
+      margin-right: 2em; }
+
+  #comparisons .graphs {
+    margin-left: 2em;
+    float: left;
+    font-size: 0.65em;
+    width: 40%;
+    height: 100%; }
+  #comparisons .graph {
+    float: left;
+    margin-bottom: 0.5em; }
+  #comparisons .bar { 
+    padding: 0;
+    height: 3em;
+    line-height: 3em;
+    padding-left: 1em;
+    text-align: left; }
+
+
+
+  #comparisons .data-framework {
+    -webkit-transition: all 0.5s;
+    position: absolute; }
+  #comparisons h2 {
+    text-align: left;
+    margin: 0 0 0.5em 0; }
+  #comparisons .data-framework {
+    overflow: auto; }

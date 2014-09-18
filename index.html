@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>D3 for jQuery people</title>
+
+    <link rel="shortcut icon" href="d3.png">
+  
+    <link rel="stylesheet" href="reveal/css/reveal.min.css">
+    <link rel="stylesheet" href="reveal/lib/css/github.css">
+
+    <link rel="stylesheet" href="slides-theme/style.css" id="theme">
+    <link rel="stylesheet" href="slides-theme/talk-specific.css" id="theme">
+    <link rel="stylesheet" href="visualisations/visualisations.css" id="theme">
+
+    <link rel="stylesheet" href="slides-theme/js/little-console.css" id="theme">
+
+    <link rel="stylesheet" href="visualisations/reddit/style.css" type="text/css" media="screen" charset="utf-8">
+    <link rel="stylesheet" href="visualisations/d3-contexts-explained.css" type="text/css" media="screen" charset="utf-8">
+</head>
+
+<body>
+
+<div class="reveal">
+<div class="slides">
+
+<section data-markdown><script type="text/template">
+# Make your designer happy
+
+[@timruffles](http://twitter.com/timruffles)
+[SidekickJS](https://www.sidekickjs.com)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Why D3?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Most charts are boring
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Why?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Designer produces...
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/nice.png>
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Developer has 2 days to make it...
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/charting-library.png>
+</script></section>
+
+<section data-markdown><script type="text/template">
+## "Ok designer, it's done! :)"
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/nasty.png>
+</script></section>
+
+<section data-markdown><script type="text/template">
+<img src=img/ecce-homo.jpg >
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Why?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Charting libraries
+
+- rigid
+- because they do everything for you
+- programming via options objects
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## D3 is different
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Let's rerun the story with D3
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Why is it so good?
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Big idea #1
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Grass-root charting
+</script></section>
+
+<section data-markdown><script type="text/template">
+## D3 is a new way to do charts
+- power to your data
+- power to your design
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Primitives for rolling your own
+</script></section>
+
+<section data-markdown><script type="text/template">
+## No pre-made visualisations
+</script></section>
+
+<section data-markdown><script type="text/template">
+## No proprietary APIs, thin wrapper over DOM
+</script></section>
+
+<section data-markdown><script type="text/template">
+## No enforced structure to your data
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Freedom!
+</script></section>
+
+
+<section data-markdown data-state=title><script type="text/template">
+## Big idea #2
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## D3 is familiar
+</script></section>
+
+<section data-markdown ><script type="text/template">
+## In jQ or d3 we...
+- select elements
+- work with that selection via chaining API
+</script></section>
+
+<section>
+<script type=code-example-alongside>
+  <div id=familiar>
+    <h3>Hi</h3>
+    <a>jQuery</a>
+    <a>MDN docs</a>
+  </div>
+</script>
+<div class=little-console></div>
+<script type=cheat>
+  d3.selectAll("#familiar a").attr("href","http://google.com");
+</script>
+</section>
+
+<section data-markdown data-state=title><script type="text/template">
+## BYO Knowledge
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Built on existing APIs
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Knowledge of HTML, CSS, SVG & rest of DOM
+</script></section>
+
+<section>
+<h3>Learn about SVG in D3, use anywhere</h3>
+<script type=code-example-alongside>
+  <svg id=svg-eg width=400 height=200></svg>
+</script>
+<div class=little-console></div>
+<script type=cheat>
+  d3.select("#svg-eg")
+    .append("circle")
+    .attr({cx: 100,cy: 100,r: 50});
+</script>
+</section>
+
+
+<section data-markdown data-state=title><script type="text/template">
+## Interactivity
+</script></section>
+
+<section>
+
+  <h3>Interaction</h3>
+  <script type=code-example-alongside>
+    <button id=clicky>
+      I'm so good to click
+    </button>
+  </script>
+  <div class=little-console></div>
+
+  <script type=cheat>
+    d3.select("#clicky").on("click",function() { alert("YAY!") });
+  </script>
+
+</section>
+
+<section data-markdown><script type="text/template">
+## So what's different?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## API focussed on data (see Big idea #1)
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## One callback turns jQ into D3
+</script></section>
+
+<section data-markdown><script type="text/template">
+## jQuery's callback
+
+```javascript
+// static value, same for all
+$(".bars")
+.css("background","red");
+```
+```javascript
+// callback to vary value for each
+$(".bars")
+.css("background",function(index,current) {
+  var el = this;
+  return $(this).data('alert') ? "red" : "green";
+});
+```
+</script></section>
+
+<section data-markdown><script type="text/template">
+## D3's callback
+
+```javascript
+d3.selectAll(".bars")
+.style("background",function(dataForElement,indexOfData) {
+  return dataForElement.alert ? "red" : "green";
+});
+```
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `(data,...) {`
+
+- the data for an element
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `(...,index) {`
+
+- where that data sits within the current data-set (order)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## The bridge, el -> data
+```javascript
+function(data,index) {
+  // return value from data + index 
+}
+```
+```javascript
+d3.select("#root")
+  .selectAll("h3")
+  .text(function(d) {
+    return d.title;
+  });
+```
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## ...and where does the data come from?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## `data()`
+
+```javascript
+// make a selection, then call data()
+d3.selectAll("h3")
+  .data([
+    {title: "jQuery"},
+    {title: "D3"}
+  ])
+  // now data can be related one-to-one with elements
+```
+</script></section>
+
+<section>
+
+  <h3>Driving the document with data</h3>
+  <script type=code-example-alongside>
+    <h3 class=drive-me></h3>
+    <h3 class=drive-me></h3>
+  </script>
+  <div class=little-console></div>
+
+  <script type=cheat>
+    d3.selectAll(".drive-me").data([{title:"hi"},{title:"jquery"}]).text(function(d) { return d.title })
+  </script>
+
+</section>
+
+<section data-markdown ><script type="text/template">
+## Datums -> elements via key function
+</script></section>
+
+<section data-markdown ><script type="text/template">
+## `ƒ(d,i) { return d.id }` 
+
+- by default, just `{ return index }`
+</script></section>
+
+<section>
+<h2>El consistency vital for animation</h2>
+</section>
+
+<section>
+<div id=comparisons></div>
+</section>
+
+
+<section data-markdown data-state=title><script type="text/template">
+## Big idea #3
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Visualisation as theatre
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Data can...
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Enter the stage
+- AJAX response, data ready to display
+- new price tick 
+- player appears on high-scores
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Act (update)
+- price increases
+- Reddit story voted down
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Exit the stage
+- player falls off high-score table
+- data filtered
+</script></section>
+
+<section data-markdown><script type="text/template">
+## We direct how our data
+
+- enters
+- updates
+- and exits (pursued by a bear)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Context
+
+- We group our code for a given selection into 3 contexts
+- enter, update, exit
+
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Life-cycle of a D3 visualisation
+
+- make a selection of elements
+- get data onto stage via `enter()`
+- present changes in update context
+- controls removal via `exit()`
+</script></section>
+
+<section>
+  <h3>Enter</h3>
+  <script type=code-example-alongside>
+    <p>Empty and boring</p>
+    <div id=add-target></div>
+  </script>
+  <div class=little-console></div>
+  <script type=cheat>
+    d3.select("#add-target").selectAll("p").data([{name:"jQuery"},{name:"UK"}]).enter().append("p").text(function(x) { return x.name });
+  </script>
+</section>
+
+<section data-markdown><script type="text/template">
+## `enter()`
+
+- all the items of data that don't have a corresponding element
+- `enter()` normally followed by `append()`
+</script></section>
+
+<section>
+  <h3>Update</h3>
+  <script type=code-example-alongside>
+    <div id=update>
+      <p>Static content</p>
+      <p>Me too</p>
+    </div>
+  </script>
+  <div class=little-console></div>
+  <script type=cheat>
+    d3.selectAll("#update p").data([{name:"jQuery"},{name:"UK"}]).text(function(x) { return x.name });
+  </script>
+</section>
+
+<section data-markdown><script type="text/template">
+## Update
+
+- implicit - return value of `data()`
+- we have an existing element ready for the data
+
+```javascript
+var update = d3.selectAll("p")
+  .data(someData);
+```
+</script></section>
+
+
+<section>
+  <h3>Exit</h3>
+  <script type=code-example-alongside>
+    <div id=exit>
+      <p>I'm safe</p>
+      <p>I'm worried</p>
+    </div>
+  </script>
+  <div class=little-console></div>
+  <script type=cheat>
+    d3.selectAll("#exit p").data([{a:"b"}]).exit().remove()
+  </script>
+</section>
+
+<section data-markdown><script type="text/template">
+## `exit()`
+
+- where we have more elements than data
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Contexts: sync viz with data
+</script></section>
+
+<section>
+
+  <div class=contexts-explained>
+
+    <div class=situation>
+      <h2>Selection</h2>
+      <h3>Elements</h3>
+      <div class='elements track'></div>
+      <button class=addEl>Add element</button>
+      <button class=delEl>Remove element</button>
+      <h3 class=code>.data()</h3>
+      <div class='data track'></div>
+      <button class=addData>Add data</button>
+      <button class=delData>Remove data</button>
+    </div>
+
+    <div class=contexts>
+      <h2>d3 Contexts</h2>
+      <div>
+        <h3 class=code>enter()</h3>
+        <div class='enter track'></div>
+      </div>
+      <div>
+        <h3>Update</h3>
+        <div class='update track'></div>
+      </div>
+      <div>
+        <h3 class=code>exit()</h3>
+        <div class='exit track'></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section data-markdown><script type="text/template">
+## Shape of D3
+
+```javascript
+function viz(rootEl,data) {
+  var update = d3
+    .select(rootEl)
+    .selectAll(sel)
+    .data(data);
+
+  var enter = update.enter()
+    .append("circle");
+
+  var exit = update.exit()
+    .remove();
+}
+```
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## We've seen enough...
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Let's build something!
+</script></section>
+
+<section>
+  <div class=reddit-pack id=reddit-pack-demo>
+    <div class=loading>Loading...</div>
+    <svg class=reddit-pack width=700 height=700></svg>
+  </div>
+</section>
+
+<section data-markdown><script type="text/template">
+## Here we go...
+
+- [Rebuild...](/anger-the-demo-gods)
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Struck by lightning?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Three big ideas about d3
+</script></section>
+
+<section data-markdown><script type="text/template">
+## 1. Grass roots data
+- primitives not widgets
+- power to you, and your design
+</script></section>
+
+<section data-markdown><script type="text/template">
+## 2. Familiar
+- DOM + $() + 1 callback
+- your existing knowledge is useful
+</script></section>
+
+<section data-markdown><script type="text/template">
+## 3. Vis as theatre
+
+- direct data on and off the stage via:
+- update
+- `enter()`
+- `exit()`
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Freedom from rubbish charts!
+</script></section>
+
+<section data-markdown ><script type="text/template">
+# Thanks!
+
+### [@timruffles](http://twitter.com/timruffles), [@sidekicksrc](http://www.sidekickjs.com)
+</script></section>
+
+<section data-markdown data-state=title><script type="text/template">
+## Where next?
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Tutorials/talks etc
+
+- [From d3 wiki](https://github.com/mbostock/d3/wiki/Tutorials)
+</script></section>
+
+<section data-markdown><script type="text/template">
+## Books
+
+<div class=gallery>
+  <img src=img/vis-quant.jpg height=500 style=float:left >
+  <div style=float:left>
+    <img src=img/information-is-beautiful.jpg height=250 >
+    <br>
+    <img src=img/taschen.jpg height=250 >
+  </div>
+</div>
+</script></section>
+
+
+<section data-markdown><script type="text/template">
+## Blogs
+
+- [Flowing Data](http://flowingdata.com/)
+- [Guardian DataBlog](http://www.theguardian.com/news/datablog)
+- [Mike Bostock](http://bost.ocks.org/mike/)
+- [Indexed](http://thisisindexed.com/)
+
+</script></section>
+
+
+
+</div>
+</div>
+
+
+<script src=vendor/d3.js></script>
+
+<script src=visualisations/comparison-bars.js></script>
+<script>comparisons.run(document.getElementById("comparisons"));</script>
+
+<script src=visualisations/d3-contexts-explained.js></script>
+<script>explainContexts(document.querySelector(".contexts-explained"));</script>
+
+<script src=slides-theme/js/code-example.js></script>
+<script>
+  var revealCodeSamples = codeExamples.revealAlongside.bind(null,"script[type=code-example-alongside]");
+</script>
+
+<script src=slides-theme/js/little-console.js></script>
+<script>
+  function showConsoles() {
+
+    // show all consoles, and register 'cheats'
+    var cheats = [];
+
+    ;[].forEach.call(document.querySelectorAll(".little-console"),function(el) {
+      var cmds = new LittleConsole.Commands;
+      var console = new LittleConsole({el: el,commands: cmds});
+      var slide = el.parentElement;
+      var cheat = slide.querySelector("[type=cheat]");
+      if(!cheat) return;
+      cheats.push({
+        console: console,
+        slide: slide,
+        src: cheat.innerHTML,
+      });
+    });
+
+    // listen for 'cheat code' - ALT + C, and fill input
+    var C = 67;
+    document.body.addEventListener("keyup",function(evt) {
+      if(evt.keyCode !== C || !evt.altKey) return;
+      var slide = Reveal.getCurrentSlide();
+      cheats.forEach(function(setup) {
+        if(setup.slide !== slide) return;
+        setup.console.setCommand(setup.src);
+      });
+
+    });
+
+  }
+</script>
+
+<!-- in slide demos -->
+<script src=visualisations/reddit/vis.js></script>
+<script>
+redditPack(document.getElementById("reddit-pack-demo"),[
+  "/r/funny/comments/22r299/alcoholism_level_engineer.json",
+  "/r/pics/comments/25olyp/a_truly_dedicated_son.json",
+  "/r/mildlyinteresting/comments/25ofa4/i_can_give_my_fingers_faces_if_i_bite_on_them.json"
+]);
+</script>
+
+<script src="reveal/lib/js/head.min.js"></script>
+<script src="reveal/js/reveal.min.js"></script>
+<script>
+  Reveal.initialize({
+
+    // Display controls in the bottom right corner
+    controls: false,
+
+    // Display a presentation progress bar
+    progress: true,
+
+    // Push each slide change to the browser history
+    history: true,
+
+    // Enable keyboard shortcuts for navigation
+    keyboard: true,
+
+    // Enable the slide overview mode
+    overview: true,
+
+    // Vertical centering of slides
+    center: false,
+
+    // Loop the presentation
+    loop: false,
+
+    // Change the presentation direction to be RTL
+    rtl: false,
+
+    // Number of milliseconds between automatically proceeding to the
+    // next slide, disabled when set to 0, this value can be overwritten
+    // by using a data-autoslide attribute on your slides
+    autoSlide: 0,
+
+    // Enable slide navigation via mouse wheel
+    mouseWheel: false,
+
+    // Apply a 3D roll to links on hover
+    rollingLinks: false,
+
+    // Transition style
+    transition: 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+    dependencies: [
+        // Cross-browser shim that fully implements classList - https://github.com/eligrey/classList.js/
+        { src: 'reveal/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+
+        // Interreveal/pret Markdown in <section> elements
+        { src: 'reveal/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+        { src: 'reveal/plugin/markdown/markdown.js', 
+          condition: function() { return !!document.querySelector( '[data-markdown]' ); },
+          callback: function() {
+            revealCodeSamples(); 
+            showConsoles();
+          } },
+
+        // Syntareveal/x highlight for <code> elements
+        { src: 'reveal/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+
+        // Zoom reveal/in and out with Alt+click
+        { src: 'reveal/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Speakreveal/er notes
+        { src: 'reveal/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+
+        // Remotreveal/e control your reveal.js presentation using a touch device
+        // { src: 'reveal/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+
+  });
+</script>
+</body>
+
+
