@@ -24,13 +24,13 @@ function vis(el,dataRoot) {
 
   var svg = d3.select(el).select('svg');
   
-  // get diameter
+  // calcuate diameter so we fit in the svg
   var diameter;
 
   // configure pack d3.layout.pack
   // - size of whole layout
-  // - how to access children from data
-  // - how to decide size of item from data
+  // - how to access reply nodes in data
+  // - size of item by length of answer body
   var layout;
        
   // bind the root of tree to svg
@@ -42,10 +42,9 @@ function vis(el,dataRoot) {
   var entered;
   
   // for update + enter
+  // - set the .leaf class on leaves
   // - position the group
   // - size the circle
-  // - set the .leaf class on leaves
-
     
   // exit - remove nodes
   var exit;
