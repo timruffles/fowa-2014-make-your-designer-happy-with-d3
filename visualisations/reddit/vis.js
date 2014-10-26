@@ -5,7 +5,7 @@ window.redditPack = main;
 
 // code
 var REDDIT_URL = "http://reddit.com";
-var REDDIT_DATA_URL = "/visualisations/reddit/data";
+var REDDIT_DATA_URL = "/fowa-2014-make-your-designer-happy-with-d3/visualisations/reddit/data";
 
 function main(el,stories,index) {
   var story = stories[(index || 0) % stories.length];
